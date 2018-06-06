@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="{{ asset('css/git.css') }}" rel="stylesheet" />
+{% endblock %}
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }} - Swapnil Jadhav ( <i>Symfony Repositories listing from github</i> ) </h1>                
+            </div>
+
+            <div>
+			<div style="overflow-x:auto;">
+                <table class="table">
+                    <thead>
+                        <tr>
+							<th>Sr.No.</th>
+                            <th>Repository Name</th>                            
+                            <th>Description</th>
+                            <th>Watchers</th>
+							<th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for repo in repoList %}
+						{% set counter = ( counter | default(0) ) + 1 %}                    
+                        <tr>   
+							<td>{{counter}}</td>
+							<td><a target="_blank" href="{{ repo.url }}">{{ repo.name }}</a></td>                                                     
+                            <td>{{repo.description}}</td>
+                            <td>{{repo.watchers}}</td>
+							<td><a target="_blank" href="{{ repo.url }}">view</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+			</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
